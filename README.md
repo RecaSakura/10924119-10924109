@@ -1,4 +1,4 @@
-# 使用Google Colab 進行 DeepFace測試
+# 使用Google Colab 進行 DeepFace測試以完成學校作業,此內容皆從網路上擷取
 前製作業
 -
 import必要數據
@@ -14,7 +14,9 @@ import必要數據
 將下載好的deepface import 進來
 
     from deepface import DeepFace as dp
-底下這段代碼作用是使用matplotlib將圖片顯示顯示出來
+   `輸出：`<br>`Directory  /root /.deepface created`<br>
+   `Directory  /root /.deepface/weights created`
+<br><br>底下這段代碼作用是使用matplotlib將圖片顯示顯示出來
 
     def show_image(*args):
     k = len(args)
@@ -39,3 +41,77 @@ import必要數據
     show_image(im01, im02)
     ###使用剛剛def的副程式 show出圖片，若只想show一張就只需要show_image(im01)
 
+比較兩張照片是否為同一人
+
+    ###查看result資料result為辨識後的各項數據
+    result = dp.verify(im01, im02, model_name="DeepFace")
+    result
+   `{'verified': True,`<br>
+    `'distance': 0.19951417603681987,
+    'threshold': 0.23,`<br>
+    `'model': 'DeepFace',
+    'detector_backend': 'opencv',
+    'similarity_metric': 'cosine',`<br>
+    `'facial_areas': {'img1': {'x': 475, 'y': 1410, 'w': 1109, 'h': 1109},`<br>
+    `'img2': {'x': 456, 'y': 1071, 'w': 1175, 'h': 1175}},
+    'time': 11.36}`<br><br>
+簡化後只顯示兩張照片是否為同一人
+
+    if(result['verified'])==True:
+        print("兩人為同一人")
+    else:
+        print("兩人不同人")
+
+辨識人種、性別、年齡、情緒
+-
+底下程式是將辨識後的資料以簡潔的方式顯示出來
+
+    ###labels將obj裡的資料，轉換成中文
+    labels = {'angry':'生氣', 'disgust':'厭惡', 'fear':'恐懼',
+          'happy':'開心', 'neutral':'普通', 
+          'sad':'悲傷', 'surprise':'吃驚',
+          'Man':'男', 'Woman':'女',
+          'asian':'亞洲', 'black':'黑', 'indian':'印弟安',
+          'latino hispanic':'拉丁美洲 (西班牙裔)', 
+          'middle eastern':'中東', 'white':'白'}
+    ###obj裡有不少數據，如同剛剛的result一樣，這段程式的作用就是將它可視化，不然輸出的數據會很雜亂
+    def show_info(obj):
+        age = obj[0]["age"]
+        emotion = labels[obj[0]['dominant_emotion']]
+        race = labels[obj[0]['dominant_race']]
+        gender = labels[obj[0]['dominant_gender']]
+        text = f"這是一位 {age} 歲的{race}人{gender}性, 他的表情是{emotion}的。"
+        print(text)
+        
+開始辨識
+
+    im03_path = "/content/drive/MyDrive/IMG1.jpg"
+    im03 = cv2.imread(im03_path)
+    obj = dp.analyze(img_path = im03_path, actions = ['age', 'gender', 'race', 'emotion'])
+    show_image(im03)
+    show_info(obj)
+   `Action: emotion: 100%|██████████| 4/4 [00:01<00:00,  2.19it/s]`<br>
+   `這是一位 34 歲的亞洲人男性, 他的表情是悲傷的。`<br>
+    
+    ###上面的輸出文字是經過簡化與可視化的結果，若直接顯示obj則:
+    obj[0]
+   `{'age': 27,
+     'region': {'x': 537, 'y': 1455, 'w': 1107, 'h': 1107},`<br>
+     `'gender': {'Woman': 0.18314786721020937, 'Man': 99.81684684753418},`<br>
+    `'dominant_gender': 'Man',`<br>
+    `'race': {'asian': 99.99927282333374,
+    'indian': 1.5001997155650315e-05,
+    'black': 1.701037199985933e-07,`<br>
+    `'white': 0.0003110175157416961,
+     'middle eastern': 1.1405072442016717e-07,
+     'latino hispanic': 0.0004004386028100271},`<br>
+    `'dominant_race': 'asian',`<br>
+    `'emotion': {'angry': 0.04594368510879576,
+      'disgust': 3.781720749884698e-05,
+     'fear': 0.014255850692279637,`<br>
+     `'happy': 0.00011057578603868023,
+     'sad': 6.9861553609371185,
+     'surprise': 5.13807272284339e-06,`<br>
+     `'neutral': 92.9534912109375},
+     'dominant_emotion': 'neutral'}`<br><br>
+     
