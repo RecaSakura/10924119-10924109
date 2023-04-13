@@ -113,8 +113,10 @@ import必要數據
      'sad': 6.9861553609371185,
      'surprise': 5.13807272284339e-06,`<br>
      `'neutral': 92.9534912109375},
-     'dominant_emotion': 'neutral'}`<br><br>
+     'dominant_emotion': 'neutral'}`<br>
  這也可以測試不同人種,性別,情緒但要注意圖片一定要清晰,不然會無法辨識。
+ 
  參考網站
  -
-    https://github.com/serengil/deepface
+https://github.com/serengil/deepface
+https://github.com/yenlung/Deep-Learning-Basics/blob/master/colab08%20%E7%94%A8%20DeepFace%20%E7%A5%9E%E9%80%9F%E6%89%93%E9%80%A0%E4%BA%BA%E8%87%89%E8%BE%A8%E8%AD%98.ipynb
