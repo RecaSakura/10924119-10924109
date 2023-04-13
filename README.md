@@ -118,5 +118,5 @@ import必要數據
  
  參考網站
  -
-https://github.com/serengil/deepface
-https://github.com/yenlung/Deep-Learning-Basics/blob/master/colab08%20%E7%94%A8%20DeepFace%20%E7%A5%9E%E9%80%9F%E6%89%93%E9%80%A0%E4%BA%BA%E8%87%89%E8%BE%A8%E8%AD%98.ipynb
+[deepface GitHub本站](https://github.com/serengil/deepface)  <br>
+[colab08 用 DeepFace 神速打造人臉辨識.ipynb](https://github.com/yenlung/Deep-Learning-Basics/blob/master/colab08%20%E7%94%A8%20DeepFace%20%E7%A5%9E%E9%80%9F%E6%89%93%E9%80%A0%E4%BA%BA%E8%87%89%E8%BE%A8%E8%AD%98.ipynb)
