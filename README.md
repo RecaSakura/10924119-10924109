@@ -1,3 +1,6 @@
+# 如果要直接用google colab打開的話可以直接點選.ipynb檔案,可以直接跳轉到colab
+# 如果要用終端機執行的話可以下載.py檔案
+<br><br>
 # 使用Google Colab 進行 DeepFace測試以完成學校作業,此內容皆從網路上擷取
 前製作業
 -
